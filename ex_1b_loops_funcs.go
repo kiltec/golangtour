@@ -7,16 +7,14 @@ import (
 
 func Sqrt(x float64) (float64, int) {
     z := x
-    var delta float64
+    delta := 1e-10
     iters := 0
     for {
         n := z - (z * z - x) / (2 * z)
-        delta = math.Abs(n - z)
         iters++
-        if delta < 1e-10 {
+        if math.Abs(n - z) < delta {
             break
         }
-        
         z = n
     }
     return z, iters
